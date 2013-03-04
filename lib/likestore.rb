@@ -1,6 +1,8 @@
 require "likestore/version"
+require 'likestore/default'
 require 'likestore/configurable'
 require 'likestore/client'
+require 'likestore/product'
 
 module Likestore
   class << self
@@ -10,7 +12,7 @@ module Likestore
     #
     # @return [Likestore::Client]
     def client
-      @client = Likestore::Client.new() #unless defined?(@client) && @client.hash == options.hash
+      @client = Likestore::Client.new(options) unless defined?(@client) && @client.hash == options.hash
       @client
     end
 
@@ -23,6 +25,7 @@ module Likestore
       return super unless client.respond_to?(method_name)
       client.send(method_name, *args, &block)
     end
-
   end
 end
+
+Likestore.setup

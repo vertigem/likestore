@@ -22,3 +22,27 @@ RSpec.configure do |config|
   end
 end
 
+def a_get(path)
+  a_request(:get, Likestore::Default::ENDPOINT + path + client_auth)
+end
+
+def stub_get(path)
+  stub_request(:get, Likestore::Default::ENDPOINT + path + client_auth)
+end
+
+def fixture_path
+  File.expand_path("../fixtures", __FILE__)
+end
+
+def fixture(file)
+  File.new(fixture_path + '/' + file)
+end
+
+def client_options
+  {store_id: 'abc', key: 'abc1'}
+end
+
+def  client_auth
+  "?idLoja=#{client_options[:store_id]}&chave=#{client_options[:key]}"
+end
+

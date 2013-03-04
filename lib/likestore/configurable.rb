@@ -5,13 +5,18 @@ module Likestore
   module Configurable
     extend Forwardable
     attr_writer :store_id, :key
+    attr_accessor :endpoint, :connection_options, :middleware, :identity_map
     def_delegator :options, :hash
 
     class << self
       def keys
         @keys ||= [
           :store_id,
-          :key
+          :key,
+          :connection_options,
+          :endpoint,
+          :middleware,
+          :identity_map
         ]
       end
     end
@@ -21,6 +26,14 @@ module Likestore
       validate_credential_type!
       self
     end
+
+    def reset!
+      Likestore::Configurable.keys.each do |key|
+        instance_variable_set(:"@#{key}", Likestore::Default.options[key])
+      end
+      self
+    end
+    alias setup reset!
 
     private
     # @return [Hash]

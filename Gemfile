@@ -17,6 +17,7 @@ group :test do
   gem 'timecop'
   gem 'webmock', '>= 1.10.1'
   gem 'autotest'
+  gem 'pry'
 end
 
 gemspec

@@ -9,7 +9,7 @@ SimpleCov.start
 
 require 'likestore'
 require 'webmock/rspec'
-
+require 'pry'
 # WebMock.disable_net_connect!(:allow => 'coveralls.io')
 
 RSpec.configure do |config|

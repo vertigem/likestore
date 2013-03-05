@@ -8,7 +8,6 @@ module Likestore
     include Likestore::API::Products
 
     def initialize(options={})
-      puts options
       Likestore::Configurable.keys.each do |key|
         instance_variable_set(:"@#{key}", options[key] || Likestore.instance_variable_get(:"@#{key}"))
       end
